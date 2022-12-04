@@ -1,4 +1,3 @@
-#--coding:utf8--
 import transformers
 import torch
 import os
@@ -15,7 +14,7 @@ def build_files(raw_data_path, tokenized_data_path, full_tokenizer, num_pieces):
     with open(raw_data_path, 'r', encoding='utf8') as f:
         print('reading lines')
         lines = json.load(f)
-        lines = [line.replace('\n', ' [SEP] ') for line in lines]  # 用[SEP]表示换行, 段落之间使用SEP表示段落结束
+        lines = [line.replace('\n', ' [SEP] ') for line in lines]  
     single = ''.join(lines)
     len_single = len(single)
     if not os.path.exists(tokenized_data_path):
@@ -65,7 +64,7 @@ def main():
     else:
         from tokenizations import tokenization_bert
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = args.device  # 此处设置程序使用哪些显卡
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.device  
     model_config = transformers.gpt2.modeling_gpt2.GPT2Config.from_json_file(args.model_config)
     print('config:\n' + model_config.to_json_string())
 
@@ -85,7 +84,7 @@ def main():
     log_step = args.log_step
     stride = args.stride
     gradient_accumulation = args.gradient_accumulation
-    fp16 = args.fp16  # 不支持半精度的显卡请勿打开
+    fp16 = args.fp16  
     fp16_opt_level = args.fp16_opt_level
     max_grad_norm = args.max_grad_norm
     num_pieces = args.num_pieces
