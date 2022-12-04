@@ -9,10 +9,6 @@ from datetime import datetime
 from torch.nn import DataParallel
 from tqdm import tqdm
 
-'''
-如果训练材料是全部堆在一起不分篇章的话用这个文件
-'''
-
 
 def build_files(raw_data_path, tokenized_data_path, full_tokenizer, num_pieces):
     with open(raw_data_path, 'r', encoding='utf8') as f:
